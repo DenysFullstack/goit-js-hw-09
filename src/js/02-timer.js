@@ -5,7 +5,7 @@ const btnStart = document.querySelector('button[data-start]')
 input.addEventListener('input', onInputDate);
 btnStart.addEventListener('click',onBtnStartClick)
 
-const flatpickr = new flatpickr(input);
+flatpickr(input);
 
 // const qtDays = document.querySelector('span[data-days]');
 // const qtHours = document.querySelector('span[data-hours]');
