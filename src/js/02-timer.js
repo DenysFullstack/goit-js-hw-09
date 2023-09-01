@@ -7,20 +7,20 @@ btnStart.addEventListener('click',onBtnStartClick)
 
 const flatpickr = new flatpickr(input);
 
-const qtDays = document.querySelector('span[data-days]');
-const qtHours = document.querySelector('span[data-hours]');
-const qtMinutes = document.querySelector('span[data-minutes]');
-const qtSeconds = document.querySelector('span[data-seconds]');
+// const qtDays = document.querySelector('span[data-days]');
+// const qtHours = document.querySelector('span[data-hours]');
+// const qtMinutes = document.querySelector('span[data-minutes]');
+// const qtSeconds = document.querySelector('span[data-seconds]');
 
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
-};
+// const options = {
+//   enableTime: true,
+//   time_24hr: true,
+//   defaultDate: new Date(),
+//   minuteIncrement: 1,
+//   onClose(selectedDates) {
+//     console.log(selectedDates[0]);
+//   },
+// };
 
 let millisecondsDifference = null;
 
