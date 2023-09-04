@@ -24,6 +24,8 @@ const options = {
   },
 };
 
+let idInterval = null;
+
 flatpickr(input, options);
 
 function onBtnStartClick() {
@@ -35,7 +37,7 @@ function onBtnStartClick() {
 
     const currentTime = pressedTime - Date.now();
 
-    if (pressedTime < Date.now()) {
+    if (currentTime < 0) {
       return stopTimer();
     }
 
