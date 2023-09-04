@@ -29,9 +29,7 @@ flatpickr(input, options);
 function onBtnStartClick() {
   input.disabled = true;
   btnStart.disabled = true;
-  function stopTimer() {
-    clearInterval(idInterval);
-  }
+
   idInterval = setInterval(() => {
     const pressedTime = new Date(input.value);
 
@@ -48,6 +46,10 @@ function onBtnStartClick() {
     qtMinutes.textContent = String(finalTime.minutes).padStart(2, '0');
     qtSeconds.textContent = String(finalTime.seconds).padStart(2, '0');
   }, 1000);
+
+  function stopTimer() {
+    clearInterval(idInterval);
+  }
 }
 
 function convertMs(ms) {
