@@ -43,15 +43,11 @@ function onBtnStartClick() {
 
     const finalTime = convertMs(currentTime);
     console.log(finalTime);
-    toStringDate()
+    qtDays.textContent = String(finalTime.days).padStart(2, '0');
+    qtHours.textContent = String(finalTime.hours).padStart(2, '0');
+    qtMinutes.textContent = String(finalTime.minutes).padStart(2, '0');
+    qtSeconds.textContent = String(finalTime.seconds).padStart(2, '0');
   }, 1000);
-}
-
-function toStringDate() {
-  qtDays.textContent = String(finalTime.days).padStart(2, '0');
-  qtHours.textContent = String(finalTime.hours).padStart(2, '0');
-  qtMinutes.textContent = String(finalTime.minutes).padStart(2, '0');
-  qtSeconds.textContent = String(finalTime.seconds).padStart(2, '0');
 }
 
 function convertMs(ms) {
