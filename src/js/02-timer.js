@@ -1,40 +1,57 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 const input = document.querySelector('#datetime-picker');
-const btnStart = document.querySelector('button[data-start]')
-input.addEventListener('input', onInputDate);
-btnStart.addEventListener('click',onBtnStartClick)
+const btnStart = document.querySelector('button[data-start]');
+const qtDays = document.querySelector('span[data-days]');
+const qtHours = document.querySelector('span[data-hours]');
+const qtMinutes = document.querySelector('span[data-minutes]');
+const qtSeconds = document.querySelector('span[data-seconds]');
 
-flatpickr(input);
+btnStart.addEventListener('click', onBtnStartClick);
+btnStart.disabled = true;
 
-// const qtDays = document.querySelector('span[data-days]');
-// const qtHours = document.querySelector('span[data-hours]');
-// const qtMinutes = document.querySelector('span[data-minutes]');
-// const qtSeconds = document.querySelector('span[data-seconds]');
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (new Date(selectedDates[0]) <= Date.now()) {
+      return alert('Please choose a date in the future');
+    }
+    btnStart.disabled = false;
+    console.log(new Date(selectedDates[0]));
+  },
+};
 
-// const options = {
-//   enableTime: true,
-//   time_24hr: true,
-//   defaultDate: new Date(),
-//   minuteIncrement: 1,
-//   onClose(selectedDates) {
-//     console.log(selectedDates[0]);
-//   },
-// };
+flatpickr(input, options);
 
-let millisecondsDifference = null;
+function onBtnStartClick() {
+  input.disabled = true;
+  btnStart.disabled = true;
+  function stopTimer() {
+    clearInterval(idInterval);
+  }
+  idInterval = setInterval(() => {
+    const pressedTime = new Date(input.value);
 
-function onInputDate(e) {
-  const targetDate = e.target.value;
-  console.log(targetDate);
-  const date = new Date(targetDate);
-  const targetMilliseconds = date.getTime();
-  console.log(targetMilliseconds);
-  const currentDate = new Date();
-  console.log(currentDate.getTime());
-  const currentQtMiliseconds = currentDate.getTime();
-  millisecondsDifference = targetMilliseconds - currentQtMiliseconds;
-  console.log(millisecondsDifference);
+    const currentTime = pressedTime - Date.now();
+
+    if (pressedTime < Date.now()) {
+      return stopTimer();
+    }
+
+    const finalTime = convertMs(currentTime);
+    console.log(finalTime);
+    toStringDate()
+  }, 1000);
+}
+
+function toStringDate() {
+  qtDays.textContent = String(finalTime.days).padStart(2, '0');
+  qtHours.textContent = String(finalTime.hours).padStart(2, '0');
+  qtMinutes.textContent = String(finalTime.minutes).padStart(2, '0');
+  qtSeconds.textContent = String(finalTime.seconds).padStart(2, '0');
 }
 
 function convertMs(ms) {
@@ -55,16 +72,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-console.log(convertMs(millisecondsDifference));
-
-function onBtnStartClick(){
-  idInterval = setInterval(()=>(
-    millisecondsDifference - 1000
-  ),1000
-  )
-  console.log(millisecondsDifference);
-}
-
-const b = 10;
-console.log(b);
